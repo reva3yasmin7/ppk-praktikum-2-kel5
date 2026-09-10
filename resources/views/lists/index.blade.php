@@ -21,17 +21,35 @@
     </nav>
 
     <main class="max-w-6xl mx-auto p-6 mt-8">
+        @if (session('success'))
+            <div class="bg-green-100 border border-green-300 text-green-800 px-4 py-3 rounded-xl mb-6 shadow-sm flex justify-between items-center">
+                <span>{{ session('success') }}</span>
+                <button onclick="this.parentElement.remove()" class="text-green-700 font-bold ml-4">&times;</button>
+            </div>
+        @endif
+
         <div class="flex justify-between items-center mb-8">
             <h2 class="text-3xl font-extrabold text-gray-800">Your Lists</h2>
-            <!-- Note: addList feature will be implemented by Gading -->
-            <button class="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-lg font-semibold shadow transition-colors cursor-not-allowed opacity-75" title="Feature coming soon by Gading">
-                + Create New List
-            </button>
+            <a href="{{ route('lists.create') }}" class="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg font-semibold shadow transition-colors flex items-center gap-1.5">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                </svg>
+                Create New List
+            </a>
         </div>
 
         @if($lists->isEmpty())
-            <div class="bg-white p-10 rounded-2xl shadow text-center border border-gray-100">
-                <p class="text-gray-500 text-lg">You don't have any lists yet.</p>
+            <div class="bg-white p-12 rounded-2xl shadow text-center border border-gray-100">
+                <div class="w-16 h-16 mx-auto mb-4 bg-green-50 rounded-full flex items-center justify-center text-green-600">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path>
+                    </svg>
+                </div>
+                <p class="text-gray-700 font-semibold text-lg">You don't have any lists yet.</p>
+                <p class="text-gray-400 text-sm mt-1 mb-6">Create a todo list to get started organizing your project.</p>
+                <a href="{{ route('lists.create') }}" class="bg-green-600 hover:bg-green-700 text-white px-6 py-2.5 rounded-lg font-semibold shadow transition inline-flex items-center gap-1.5">
+                    Create Your First List
+                </a>
             </div>
         @else
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -65,7 +83,7 @@
                                 <span class="font-semibold text-green-600">{{ $completedTasks }}</span> / {{ $totalTasks }} Tasks Completed
                             </div>
                             
-                            <a href="#" class="text-indigo-600 hover:text-indigo-800 text-sm font-semibold">View Details &rarr;</a>
+                            <a href="{{ route('lists.show', $list) }}" class="text-indigo-600 hover:text-indigo-800 text-sm font-semibold">View Details &rarr;</a>
                         </div>
                     </div>
                 @endforeach
