@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CollaboratorController;
 use App\Http\Controllers\ListController;
 use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Route;
