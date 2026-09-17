@@ -3,7 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CollaboratorController;
 use App\Http\Controllers\ListController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 
 Route::get('/', function () {
     return redirect('/login');
@@ -15,6 +15,9 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::middleware('auth')->group(function () {
     Route::get('/lists', [ListController::class, 'index'])->name('lists.index');
-    Route::post('/lists/{list}/collaborators', [CollaboratorController::class, 'store'])->name('collaborators.store');
-    Route::delete('/lists/{list}/collaborators/{user}', [CollaboratorController::class, 'destroy'])->name('collaborators.destroy');
+
+    // User Management Routes (addUser & viewUser)
+    Route::get('/users', [UserController::class, 'index'])->name('users.index');
+    Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
+    Route::post('/users', [UserController::class, 'store'])->name('users.store');
 });
