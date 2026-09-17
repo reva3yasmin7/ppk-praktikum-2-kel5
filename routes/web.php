@@ -1,8 +1,7 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CollaboratorController;
 use App\Http\Controllers\ListController;
 use App\Http\Controllers\UserController;
 
